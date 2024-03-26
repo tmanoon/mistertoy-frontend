@@ -9,9 +9,11 @@ export function ToyEdit() {
     const navigate = useNavigate()
     const [toyToEdit, setToyToEdit] = useState(toyService.getEmptyToy())
     const { toyId } = useParams()
+    const labels = toyService.getLabels()
 
     useEffect(() => {
         if (toyId) loadToy()
+        else setToyToEdit(toyService.getEmptyToy())
     }, [])
 
     function loadToy() {
@@ -25,8 +27,19 @@ export function ToyEdit() {
 
     function handleChange({ target }) {
         let { value, type, name: field } = target
-        value = type === 'number' ? +value : value
-        setToyToEdit((prevToy) => ({ ...prevToy, [field]: value }))
+        if (field === 'labels' && type === 'checkbox') {
+            if (target.checked) {
+                setToyToEdit(prevToy => ({ ...prevToy, labels: [...prevToy.labels, value] }))
+            } else {
+                setToyToEdit(prevToy => ({ ...prevToy, labels: prevToy.labels.filter(label => label !== value) }))
+                target.checked = !target.checked
+            }
+        }
+        else {
+            const newValue = type === 'number' ? +value : value
+            if(type === 'checkbox') value = target.checked
+            setToyToEdit(prevToy => ({ ...prevToy, [field]: newValue }))
+        }
     }
 
     function onSaveToy(ev) {
@@ -48,28 +61,40 @@ export function ToyEdit() {
             <h2>{toyToEdit._id ? 'Edit' : 'Add'} toy</h2>
 
             <form onSubmit={onSaveToy} >
-                <label htmlFor="name">Name: </label>
-                <input type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Enter name..."
-                    value={toyToEdit.name}
-                    onChange={handleChange}
-                />
-                <label htmlFor="price">Price : </label>
-                <input type="number"
-                    name="price"
-                    id="price"
-                    placeholder="Enter price"
-                    value={toyToEdit.price}
-                    onChange={handleChange}
-                />
-
-                <div>
-                    <button>{toyToEdit._id ? 'Save' : 'Add'}</button>
-                    <Link to="/toy">Cancel</Link>
+                <div className="name-edit">
+                    <label htmlFor="name">Name: </label>
+                    <input type="text"
+                        name="name"
+                        id="name"
+                        placeholder="Enter the toy's name..."
+                        value={toyToEdit.name}
+                        onChange={handleChange} />
                 </div>
+                <div className="price-edit"><label htmlFor="price">Price: </label>
+                    <input type="number"
+                        name="price"
+                        id="price"
+                        placeholder="Enter price"
+                        value={toyToEdit.price}
+                        onChange={handleChange} />
+                </div>
+                <div className="labels"><label htmlFor="label">Labels: </label>
+                    <ul>
+                        {labels.map(label => {
+                            return <li key={label}>
+                                <input type="checkbox" id={label} onChange={handleChange} checked={toyToEdit.labels.includes(label)} name="labels" value={label} />
+                                <label htmlFor={label}>{label}</label>
+                            </li>
+                        })}
+                    </ul>
+                </div>
+                <div className="stock">
+                    <label htmlFor="stock">In stock: </label>
+                    <input type="checkbox" id="stock" name="inStock" checked={toyToEdit.inStock} onChange={handleChange} />
+                </div>
+                <button>{toyToEdit._id ? 'Save' : 'Add'}</button>
+                <Link to="/toy">Cancel</Link>
             </form>
-        </section>
+        </section >
     )
 }
