@@ -36,19 +36,6 @@ export function ToyIndex() {
             })
     }
 
-    function onEditToy(toy) {
-        const price = +prompt('New price?')
-        const toyToSave = { ...toy, price }
-
-        saveToy(toyToSave)
-            .then((savedToy) => {
-                showSuccessMsg(`Toy updated to price: $${savedToy.price}`)
-            })
-            .catch(err => {
-                showErrorMsg('Cannot update toy')
-            })
-    }
-
     function addToCart(toy) {
         console.log(`Adding ${toy.name} to cart`)
         dispatch({ type: ADD_TOY_TO_CART, toy })
@@ -65,8 +52,7 @@ export function ToyIndex() {
                     ? <ToyList
                         toys={toys}
                         onRemoveToy={onRemoveToy}
-                        onEditToy={onEditToy}
-                        addToCart={addToCart}
+                        // addToCart={addToCart}
                     />
                     : <div>Loading...</div>
                 }
