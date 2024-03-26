@@ -2,14 +2,14 @@
     gap: 1em;
 }
 
-.contact-article img {
+/* .contact-article img {
     margin-block: 1em 0.45em;
     border-radius: 50%;
     height: 4.9em;
     width: 4.9em;
     object-fit: cover;
     background-color: rgba(240, 245, 255, 0.589);
-}
+} */
 
 .contact-article span{
     font-weight: lighter;

@@ -18,17 +18,12 @@
     min-width: 10%;
 }
 
-.contact-actions .remove-btn::before {
-    content: '\f2ed';
-    font-family: fa-reg;
-}
-
-.contact-actions .edit-btn::before {
-    content: '\f044';
-    font-family: fa-reg;
-}
-
 .contact-list,
 .contact-list li {
     transition: 1s ease-in-out;
+}
+
+.toy-actions .remove-btn::before {
+    content: "\f2ed";
+    font-family: fa;
 }
