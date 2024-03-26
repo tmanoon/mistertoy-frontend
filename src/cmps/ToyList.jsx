@@ -1,5 +1,5 @@
-const { Link } = ReactRouterDOM
-const { useSelector } = ReactRedux
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export function ToyList({ onRemoveToy }) {
 	const toys = useSelector(storeState => storeState.toyModule.toys)
