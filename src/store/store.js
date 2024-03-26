@@ -2,7 +2,7 @@ import {
     combineReducers,
     compose,
     legacy_createStore as createStore
-} from "redux"
+} from 'redux'
 
 // const { createStore, compose, combineReducers } = Redux
 
