@@ -15,7 +15,8 @@ export const toyService = {
     save,
     remove,
     getEmptyToy,
-    getDefaultFilter
+    getDefaultFilter,
+    getLabels
 }
 
 function query(filterBy = {}) {
@@ -74,6 +75,8 @@ function save(toy) {
     } else {
         // when switching to backend - remove the next line
         // toy.owner = userService.getLoggedinUser()
+        toy._id = utilService.makeId()
+        toy.createdAt = Date.now()
         return storageService.post(STORAGE_KEY, toy)
     }
 }
@@ -82,7 +85,8 @@ function save(toy) {
 function getEmptyToy() {
     return {
         name: '',
-        labels: '',
+        price: 0,
+        labels: [],
         createdAt: '',
         inStock: ''
     }
@@ -129,3 +133,6 @@ function _createToy(name, price, labels, createdAt, inStock) {
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 6', price: 980}).then(x => console.log(x))
 
 
+function getLabels() {
+    return labels
+}

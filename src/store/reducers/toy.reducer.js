@@ -35,7 +35,7 @@ export function toyReducer(state = initialState, action = {}) {
             return {
                 ...state,
                 toys: state.toys.filter(toy => toy._id !== action.toyId),
-                lasttoys
+                lastToys
             }
         case ADD_TOY:
 
