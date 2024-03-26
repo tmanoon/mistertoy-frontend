@@ -1,0 +1,8 @@
+body {
+    background-color: rgb(216, 234, 253);
+}
+
+.home-section,
+.contacts-section {
+    margin-inline: 1em;
+}

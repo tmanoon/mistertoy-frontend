@@ -1,0 +1,34 @@
+.contact-list {
+    columns: 2 360px;
+    gap: 2em;
+    column-rule: rgba(240, 245, 255, 0.678) solid 1px;
+}
+
+.contact-list li:first-child {
+    border-block-start: rgba(240, 245, 255, 0.678) solid 1px;
+}
+
+.contact-list li:not(:last-child) {
+    padding-block: 0.25em;
+    border-block-end: rgba(240, 245, 255, 0.678) solid 1px;
+}
+
+.contact-actions {
+    gap: 0.3125em;
+    min-width: 10%;
+}
+
+.contact-actions .remove-btn::before {
+    content: '\f2ed';
+    font-family: fa-reg;
+}
+
+.contact-actions .edit-btn::before {
+    content: '\f044';
+    font-family: fa-reg;
+}
+
+.contact-list,
+.contact-list li {
+    transition: 1s ease-in-out;
+}

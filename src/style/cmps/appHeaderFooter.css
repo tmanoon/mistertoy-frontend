@@ -1,0 +1,24 @@
+.header-section,
+.footer-section {
+    padding: 1em;
+    background-color: rgba(177, 162, 255, 0.742);
+}
+
+.header-section {
+    padding-block: 1.75em;
+    height: 2em;
+}
+
+.footer-section {
+    padding-block: 0.5em;
+}
+
+.header-section nav {
+    gap: 2em;
+}
+
+.footer-section {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}

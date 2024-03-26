@@ -1,0 +1,25 @@
+.input-div {
+    align-items: flex-start;
+}
+
+.contact-edit-form {
+    gap: 4em;
+    margin-block: 7em;
+}
+
+.contact-edit-img {
+    object-fit: contain;
+    height: auto;
+}
+
+.contact-edit-btn {
+    padding-inline: 3em;
+    font-size: 1em;
+    align-self: center;
+    background-color: cornflowerblue;
+    color: bisque;
+}
+
+.img-and-input-div {
+    gap: 7em;
+}
