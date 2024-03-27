@@ -2,7 +2,8 @@ import { utilService } from './util.service.js'
 import { httpService } from './http.service.js'
 
 const BASE_URL = 'toy/'
-
+const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
+'Outdoor', 'Battery Powered', 'Lego', 'Computer Game']
 
 export const toyService = {
     query,
@@ -10,7 +11,8 @@ export const toyService = {
     save,
     remove,
     getEmptyToy,
-    getDefaultFilter
+    getDefaultFilter,
+    getLabels
 }
 
 function query(filterBy = {}) {
@@ -48,4 +50,8 @@ function getDefaultFilter() {
         inStock: '',
         sortBy: ''
     }
+}
+
+function getLabels() {
+    return labels
 }

@@ -9,6 +9,7 @@ const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
 
 _createToys()
 
+
 export const toyService = {
     query,
     getById,
