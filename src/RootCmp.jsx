@@ -9,6 +9,7 @@ import { store } from './store/store.js'
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { AppFooter } from './cmps/AppFooter.jsx'
 import { HomePage } from './pages/HomePage.jsx'
+import { Dashboard } from './pages/Dashboard.jsx'
 
 export function App() {
 
@@ -25,6 +26,7 @@ export function App() {
                         <Route element={<ToyEdit />} path="/toy/edit" />
                         <Route element={<ToyEdit />} path="/toy/edit/:toyId" />
                         <Route element={<ToyDetails />} path="/toy/:toyId" />
+                        <Route element={<Dashboard />} path="/toy/dashboard" />
                         {/* <Route element={<UserDetails />} path="/user/:userId" /> */}
                     </Routes>
                 </main>
