@@ -4,6 +4,7 @@ import { PriceChart } from '../cmps/PriceChart.jsx'
 import { SET_DATA } from '../store/reducers/app.reducer.js'
 import { useDispatch } from 'react-redux'
 import { StockChart } from '../cmps/StockChart.jsx'
+import { LineChart } from '../cmps/LineChart.jsx'
 
 export function Dashboard() {
     const [toys, setToys] = useState([])
@@ -67,6 +68,7 @@ export function Dashboard() {
             </select>
             <PriceChart />
             <StockChart percentageOfStock={stockChartData}/>
+            <LineChart />
         </>
     )
 }
