@@ -9,9 +9,9 @@
 
 /* Pages */
 @import 'pages/toyIndex.css';
-
+@import 'pages/toyEdit.css';
 /* Components */
 @import 'cmps/appHeaderFooter.css';
 @import 'cmps/toyList.css';
 @import 'cmps/toyPreview.css';
-@import 'pages/toyEdit.css';
+@import 'cmps/PriceChart.css'
