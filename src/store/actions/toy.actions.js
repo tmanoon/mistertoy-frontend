@@ -1,10 +1,11 @@
-import { toyService } from "../../services/toy.service-old.js";
-import { showSuccessMsg } from "../../services/event-bus.service.js";
+import { toyService } from "../../services/toy.service.js"
+import { showSuccessMsg } from "../../services/event-bus.service.js"
 import { ADD_TOY, TOY_UNDO, REMOVE_TOY, SET_TOYS, SET_FILTER_BY, SET_IS_LOADING, UPDATE_TOY } from "../reducers/toy.reducer.js";
 import { store } from "../store.js";
 
 export function loadToys() {
     const filterBy = store.getState().toyModule.filterBy
+    console.log(filterBy)
     store.dispatch({ type: SET_IS_LOADING, isLoading: true })
     return toyService.query(filterBy)
         .then(toys => {
