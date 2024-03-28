@@ -1,5 +1,8 @@
 import { useEffect, useState, useRef } from 'react'
 import { utilService } from "../services/util.service.js"
+import { TxtField } from './TxtField.jsx'
+import { SelectEl } from './SelectEl.jsx'
+// import { StockSelect } from './StockSelect.jsx'
 
 export function ToyFilter({ filterBy, onSetFilter }) {
 
@@ -17,24 +20,18 @@ export function ToyFilter({ filterBy, onSetFilter }) {
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
-    return <section className="contact-filter">
-        <label htmlFor="name">
-            By name:
-        </label>
-        <input type="text" name="name" id="name" placeholder="Enter the toy's name" value={filterBy.name} onChange={handleChange} />
+    return <section className="contact-filter" style={{ position: 'relative' }}>
+        <TxtField by={'name'} setFilterByToEdit={setFilterByToEdit} />
         <label>Stock state: </label>
-        <select value={filterByToEdit.stockState} onChange={handleChange} name="inStock">
-            <option value="">Choose</option>
-            <option value="available">In stock</option>
-            <option value="low">Low in stock</option>
-            <option value="gone">Not in stock</option>
-        </select>
+        <SelectEl options={[{ status: 'In stock', value: 'available' },
+        { status: 'Low in stock', value: 'low' }, 
+        { status: 'not in stock', value: 'gone' }]}
+        setFilterByToEdit={setFilterByToEdit} name={"inStock"} />
         <label>Sort By:</label>
-        <select value={filterBy.sortBy} onChange={handleChange} name="sortBy">
-            <option value="all">Choose</option>
-            <option value="name">Name</option>
-            <option value="price">Price</option>
-            <option value="createdAt">Creation date</option>
-        </select>
+        <SelectEl options={[{ status: 'Name', value: 'name' },
+        { status: 'Price', value: 'price' }, 
+        { status: 'Creation date', value: 'createdAt' }]}
+        setFilterByToEdit={setFilterByToEdit} name={"sortBy"} />
     </section>
 }
+
