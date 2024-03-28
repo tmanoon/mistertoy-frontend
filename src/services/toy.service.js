@@ -47,7 +47,7 @@ function getEmptyToy() {
 function getDefaultFilter() {
     return {
         name: '',
-        inStock: '',
+        inStock: undefined,
         sortBy: ''
     }
 }
