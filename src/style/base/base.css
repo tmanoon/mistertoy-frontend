@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     font-family: dosis, Tahoma, Arial;
+    color: var(--primary-txt-clr);
 }
 
 html {
