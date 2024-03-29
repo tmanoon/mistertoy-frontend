@@ -15,9 +15,9 @@ export function SelectEl({ options, setFilterByToEdit, name }) {
             <Select
                 onChange={handleChange}
                 sx={{
-                    marginTop: 35,
-                    width: 250,
-                    height: 50,
+                    marginTop: 0,
+                    width: 150,
+                    height: 30,
                 }}
                 value={currChoice}
             >

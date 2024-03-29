@@ -20,12 +20,11 @@ export function ToyFilter({ filterBy, onSetFilter }) {
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
-    return <section className="contact-filter" style={{ position: 'relative' }}>
+    return <section className="toy-filter flex center" style={{ position: 'relative' }}>
         <TxtField by={'name'} setFilterByToEdit={setFilterByToEdit} />
         <label>Stock state: </label>
-        <SelectEl options={[{ status: 'In stock', value: 'available' },
-        { status: 'Low in stock', value: 'low' }, 
-        { status: 'not in stock', value: 'gone' }]}
+        <SelectEl options={[{ status: 'In stock', value: true },
+        { status: 'not in stock', value: false }]}
         setFilterByToEdit={setFilterByToEdit} name={"inStock"} />
         <label>Sort By:</label>
         <SelectEl options={[{ status: 'Name', value: 'name' },

@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material"
 import React, { useState } from "react"
 
-export function TxtField({ by, filterByToEdit, setFilterByToEdit }) {
+export function TxtField({ by, setFilterByToEdit }) {
   const [name, setName] = useState("")
 
   function handleChange(e) {
@@ -15,11 +15,12 @@ export function TxtField({ by, filterByToEdit, setFilterByToEdit }) {
     <div
       style={{
         marginLeft: "10px",
+        padding: 0
       }}
     >
       <TextField
         value={name}
-        label={`By ${by}`}
+        placeholder={` Filter by ${by}`}
         onChange={handleChange}
       />
     </div>
