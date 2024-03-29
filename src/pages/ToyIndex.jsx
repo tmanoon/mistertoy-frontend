@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-
+import { LoginSignup } from '../cmps/LoginSignup.jsx'
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 import { ToyFilter } from '../cmps/ToyFilter.jsx'
 import { ToyList } from '../cmps/ToyList.jsx'
@@ -44,7 +44,7 @@ export function ToyIndex() {
 
     return (
         <div>
-            <h3>Toys App</h3>
+            <LoginSignup />
             <main>
                 <Link to="/toy/edit">Add a toy</Link>
                 <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
