@@ -23,3 +23,7 @@
 .img-and-input-div {
     gap: 7em;
 }
+
+.error-input { 
+    border: 1px solid rgb(255, 93, 128);
+}
