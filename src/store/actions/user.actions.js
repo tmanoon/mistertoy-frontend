@@ -43,3 +43,13 @@ export function checkout(diff) {
             throw err
         })
 }
+
+export function getLoggedinUser() {
+    try {
+        const user = userService.getLoggedinUser()
+        store.dispatch({ type: SET_USER, user })
+        return user
+    } catch (err) {
+        console.log('err', err)
+    }
+}
