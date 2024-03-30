@@ -1,7 +1,7 @@
 import { toyService } from "../../services/toy.service.js"
 import { showSuccessMsg } from "../../services/event-bus.service.js"
 import { ADD_TOY, TOY_UNDO, REMOVE_TOY, SET_TOYS, SET_FILTER_BY, SET_IS_LOADING, UPDATE_TOY } from "../reducers/toy.reducer.js";
-import { store } from "../store.js";
+import { store } from "../store.js"
 
 
 export async function loadToys() {
@@ -9,10 +9,8 @@ export async function loadToys() {
         const filterBy = store.getState().toyModule.filterBy
         store.dispatch({ type: SET_IS_LOADING, isLoading: true })
         const toys = await toyService.query(filterBy)
-        console.log(toys)
         store.dispatch({ type: SET_TOYS, toys })
     } catch (err) {
-        console.log('toy action -> Cannot load toys', err)
         throw err
     } finally {
         store.dispatch({ type: SET_IS_LOADING, isLoading: false })
@@ -46,7 +44,6 @@ export async function saveToy(toy) {
         const type = toy._id ? UPDATE_TOY : ADD_TOY
         const savedToy = await toyService.save(toy)
         store.dispatch({ type, toy: savedToy })
-        // return savedToy
     } catch (err) {
         console.log('toy action -> Cannot save toy', err)
         throw err
