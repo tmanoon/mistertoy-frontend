@@ -30,14 +30,15 @@ function save(toy) {
     if (toy._id) {
         return httpService.put(BASE_URL, toy)
     } else {
+        toy.createdAt = Date.now()
         return httpService.post(BASE_URL, toy)
     }
 }
 
 function getEmptyToy() {
     return {
-        id: utilService.makeId(),
         name: '',
+        price: 0,
         labels: '',
         createdAt: '',
         inStock: ''
@@ -47,7 +48,7 @@ function getEmptyToy() {
 function getDefaultFilter() {
     return {
         name: '',
-        inStock: undefined,
+        inStock: 'all',
         sortBy: ''
     }
 }

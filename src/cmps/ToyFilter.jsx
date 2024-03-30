@@ -23,8 +23,8 @@ export function ToyFilter({ filterBy, onSetFilter }) {
     return <section className="toy-filter flex center" style={{ position: 'relative' }}>
         <TxtField by={'name'} setFilterByToEdit={setFilterByToEdit} />
         <label>Stock state: </label>
-        <SelectEl options={[{ status: 'In stock', value: true },
-        { status: 'not in stock', value: false }]}
+        <SelectEl options={[{ status: 'In stock', value: 'available' },
+        { status: 'Not in stock', value: 'gone' }]}
         setFilterByToEdit={setFilterByToEdit} name={"inStock"} />
         <label>Sort By:</label>
         <SelectEl options={[{ status: 'Name', value: 'name' },
