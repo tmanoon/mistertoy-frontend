@@ -1,7 +1,16 @@
 import { NavLink } from 'react-router-dom'
 import { LoginSignup } from '../cmps/LoginSignup.jsx'
+import { userService } from '../services/user.service.js'
+import { useState, useEffect } from 'react'
 
 export function AppHeader() {
+    const [user, setUser] = useState(null)
+
+    useEffect(() => {
+        const loggedInuUser = userService.getLoggedinUser()
+        console.log(loggedInuUser)
+        if(loggedInuUser) setUser(loggedInuUser)
+    }, [])
 
     return <>
         <header className="header-section flex align-center space-between">
@@ -11,6 +20,7 @@ export function AppHeader() {
                 <NavLink to="/about" >About</NavLink>
                 <NavLink to="/toy" >Toys</NavLink>
                 <NavLink to="/toy/dashboard" >Dashboard</NavLink>
+                {user && <NavLink to={`/user/${user._id}`}>Profile</NavLink>}
             </nav>
         </header >
 
