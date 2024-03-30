@@ -23,10 +23,15 @@ export function ToyDetails() {
     if (!toy) return <div>Loading...</div>
     return (
         <section className="toy-details">
-            <h1>toy name : {toy.name}</h1>
+            <h1>Toy name : {toy.name}</h1>
             <h2>Price: ${toy.price}</h2>
             <h2>In stock: {toy.inStock ? 'Yes' : 'No'}</h2>
-           <h2>Belongs to categories: </h2>{toy.labels.map(label => <pre key={label}>{label}</pre>)}
+            <h2>Id: {toy._id}</h2>
+            {toy.owner && <h2>Owner: {toy.owner}</h2>}
+            <h2>Belongs to categories:
+                {toy.labels.length === 1 && toy.labels[0]}
+                {toy.labels.length > 1 && toy.labels.map((label, idx, arr) => <span key={label}> {label} {idx < arr.length - 1 && ','} </span>)}
+            </h2>
             <Link to={`/toy/edit/${toy._id}`}>Edit</Link> &nbsp;
             <Link to={`/toy`}>Back</Link>
             <p>
