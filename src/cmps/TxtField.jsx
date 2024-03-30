@@ -22,6 +22,8 @@ export function TxtField({ by, setFilterByToEdit }) {
         value={name}
         placeholder={` Filter by ${by}`}
         onChange={handleChange}
+        inputProps={{ style: { padding: '0.25em' },}}
+    
       />
     </div>
   )
