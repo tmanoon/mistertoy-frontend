@@ -1,7 +1,8 @@
-.click-signup {
+.click-signup, .click-logout {
     cursor: pointer;
 }
 
-.toy-filter {
+.form-login-signup {
     gap: 1em;
+    margin-block: .5em;
 }

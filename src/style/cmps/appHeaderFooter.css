@@ -2,6 +2,7 @@
 .footer-section {
     padding: 1em;
     background-color: rgba(177, 162, 255, 0.742);
+    height: auto;
 }
 
 .header-section {
