@@ -2,6 +2,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import '../src/style/main.css'
 
+import { UserDetails } from './pages/UserDetails.jsx'
 import { About } from './pages/About.jsx'
 import { ToyDetails } from './pages/ToyDetails.jsx'
 import { ToyEdit } from './pages/ToyEdit.jsx'
@@ -28,7 +29,7 @@ export function App() {
                         <Route element={<ToyEdit />} path="/toy/edit/:toyId" />
                         <Route element={<ToyDetails />} path="/toy/:toyId" />
                         <Route element={<Dashboard />} path="/toy/dashboard" />
-                        {/* <Route element={<UserDetails />} path="/user/:userId" /> */}
+                        <Route element={<UserDetails />} path="/user/:userId" />
                     </Routes>
                 </main>
                 <AppFooter />
