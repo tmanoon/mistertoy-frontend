@@ -1,4 +1,4 @@
-import { toyService } from "../../services/toy.service-old.js"
+import { toyService } from "../../services/toy.service.js"
 
 //* Toys
 export const SET_TOYS = 'SET_TOYS'
@@ -83,8 +83,6 @@ export function toyReducer(state = initialState, action = {}) {
                 ...state,
                 toys: [...state.lastToys]
             }
-
-
         default:
             return state
     }
