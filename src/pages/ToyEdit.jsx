@@ -16,13 +16,14 @@ export function ToyEdit() {
         else setToyToEdit(toyService.getEmptyToy())
     }, [])
 
-    function loadToy() {
-        toyService.getById(toyId)
-            .then(toy => setToyToEdit(toy))
-            .catch(err => {
-                console.log('Had issues in toy edit', err)
-                navigate('/toy')
-            })
+    async function loadToy() {
+        try {
+            const toy = await toyService.getById(toyId)
+            setToyToEdit(toy)
+        } catch (err) {
+            console.log('Had issues in toy edit', err)
+            navigate('/toy')
+        }
     }
 
     function handleChange({ target }) {
@@ -37,23 +38,23 @@ export function ToyEdit() {
         }
         else {
             const newValue = type === 'number' ? +value : value
-            if(type === 'checkbox') value = target.checked
+            if (type === 'checkbox') value = target.checked
             setToyToEdit(prevToy => ({ ...prevToy, [field]: newValue }))
         }
     }
 
-    function onSaveToy(ev) {
-        ev.preventDefault()
-        if (!toyToEdit.price) toyToEdit.price = 1000
-        saveToy(toyToEdit)
-            .then(() => {
-                showSuccessMsg('toy Saved!')
-                navigate('/toy')
-            })
-            .catch(err => {
-                console.log('Had issues in toy details', err)
-                showErrorMsg('Had issues in toy details')
-            })
+    async function onSaveToy(ev) {
+        try {
+            ev.preventDefault()
+            if (!toyToEdit.price) toyToEdit.price = 20
+            toyToEdit.createdAt = Date.now()
+            await saveToy(toyToEdit)
+            showSuccessMsg('toy Saved!')
+            navigate('/toy')
+        } catch (err) {
+            console.log('Had issues in toy details', err)
+            showErrorMsg('Had issues in toy details')
+        }
     }
 
     return (

@@ -27,7 +27,6 @@ export function ToyIndex() {
 
     async function onRemoveToy(toyId) {
         try {
-            console.log(toyId)
             await removeToyOptimistic(toyId)
             showSuccessMsg('Toy removed')
         } catch (err) {
