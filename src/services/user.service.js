@@ -83,6 +83,6 @@ function getEmptyCredentials() {
 }
 
 function getLoggedinUser() {
-    const user = sessionStorage.getItem(STORAGE_KEY_LOGGEDIN)
+    const user = JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN))
     return user
 }
