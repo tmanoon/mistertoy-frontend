@@ -29,9 +29,9 @@ async function login({ username, password }) {
 }
 
 
-async function signup({ username, password, fullname }) {
+async function signup({ username, password, fullname, isAdmin = false }) {
     try {
-        const user = { username, password, fullname, score: 10000 }
+        const user = { username, password, fullname, isAdmin }
         const _user = await httpService.post(BASE_URL + 'signup', user)
         if (_user) return _setLoggedinUser(_user)
         else return Promise.reject('Invalid signup')
@@ -94,3 +94,26 @@ function getEmptyCredentials() {
 
 
 
+// [
+//     {
+//       _id: ObjectId('6606c6c7a197988982cb50b5'),
+//       fullname: 'Manoon Manooni',
+//       username: 'manoon',
+//       password: 'manoon',
+//       isAdmin: false
+//     },
+//     {
+//       _id: ObjectId('6606c6c7a197988982cb50b6'),
+//       fullname: 'Kashoosh Kashooshi',
+//       username: 'kashoosh',
+//       password: 'kashoosh',
+//       isAdmin: false
+//     },
+//     {
+//       _id: ObjectId('6606c6c7a197988982cb50b7'),
+//       fullname: 'Shoval Sabag',
+//       username: 'Shovals',
+//       password: 'shovals',
+//       isAdmin: true
+//     }
+//   ]
