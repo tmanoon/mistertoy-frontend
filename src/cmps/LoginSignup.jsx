@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 export function LoginSignup() {
     const [loggedInUser, setLoggedInUser] = useState(userService.getLoggedinUser())
-    const [credentials, setCredentials] = useState({ username: '', password: '', fullname: '' })
+    const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
     const [isSignup, setSignup] = useState(false)
 
     async function onLogoutUser(e) {
@@ -12,11 +12,12 @@ export function LoginSignup() {
             e.stopPropagation()
             await logout(credentials)
             setLoggedInUser(userService.getLoggedinUser())
+            setCredentials(userService.getEmptyCredentials())
         } catch (err) {
             console.log(err)
         }
     }
-    
+
     function onSignupUser(e) {
         e.preventDefault()
         setSignup(isSignup => !isSignup)
@@ -58,7 +59,7 @@ export function LoginSignup() {
                         {isSignup &&
                             <input value={credentials.fullname} type="text" name="fullname"
                                 placeholder="Your full name" onChange={onLoginSignupUser} />}
-                        <button>Login</button>
+                        <button>{isSignup ? 'Sign up' : 'Login'}</button>
                     </form>
                     <span>Not a user yet? Click <span className='click-signup' onClick={onSignupUser}>here </span> to sign up.</span>
                 </div>
