@@ -67,13 +67,8 @@ function getById(userId) {
     return httpService.get('user/' + userId)
 }
 
-
-function getLoggedinUser() {
-    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN))
-}
-
 function _setLoggedinUser(user) {
-    const userToSave = { _id: user._id, fullname: user.fullname, score: user.score }
+    const userToSave = { _id: user._id, fullname: user.fullname}
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave
 }
@@ -87,33 +82,7 @@ function getEmptyCredentials() {
     }
 }
 
-
-// Test Data
-// userService.signup({username: 'bobo', password: 'bobo', fullname: 'Bobo McPopo'})
-// userService.login({username: 'bobo', password: 'bobo'})
-
-
-
-// [
-//     {
-//       _id: ObjectId('6606c6c7a197988982cb50b5'),
-//       fullname: 'Manoon Manooni',
-//       username: 'manoon',
-//       password: 'manoon',
-//       isAdmin: false
-//     },
-//     {
-//       _id: ObjectId('6606c6c7a197988982cb50b6'),
-//       fullname: 'Kashoosh Kashooshi',
-//       username: 'kashoosh',
-//       password: 'kashoosh',
-//       isAdmin: false
-//     },
-//     {
-//       _id: ObjectId('6606c6c7a197988982cb50b7'),
-//       fullname: 'Shoval Sabag',
-//       username: 'Shovals',
-//       password: 'shovals',
-//       isAdmin: true
-//     }
-//   ]
+function getLoggedinUser() {
+    const user = sessionStorage.getItem(STORAGE_KEY_LOGGEDIN)
+    return user
+}

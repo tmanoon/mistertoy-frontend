@@ -1,19 +1,8 @@
-import { utilService } from './util.service.js'
 import { httpService } from './http.service.js'
 
 const BASE_URL = 'toy/'
 const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
 'Outdoor', 'Battery Powered', 'Lego', 'Computer Game']
-
-export const toyService = {
-    query,
-    getById,
-    save,
-    remove,
-    getEmptyToy,
-    getDefaultFilter,
-    getLabels
-}
 
 function query(filterBy = {}) {
     return httpService.get(BASE_URL, filterBy)
@@ -28,9 +17,8 @@ function remove(toyId) {
 
 function save(toy) {
     if (toy._id) {
-        return httpService.put(BASE_URL, toy)
+        return httpService.put(BASE_URL, {toy})
     } else {
-        toy.createdAt = Date.now()
         return httpService.post(BASE_URL, toy)
     }
 }
@@ -55,4 +43,14 @@ function getDefaultFilter() {
 
 function getLabels() {
     return labels
+}
+
+export const toyService = {
+    query,
+    getById,
+    save,
+    remove,
+    getEmptyToy,
+    getDefaultFilter,
+    getLabels
 }
