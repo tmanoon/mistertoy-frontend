@@ -14,7 +14,7 @@ export function ToyPreview({ toy }) {
                 <h4>{toy.name}</h4>
                 <h6>Price:&nbsp;&nbsp;<span>${toy.price}</span></h6>
                 <h6>Status:&nbsp;&nbsp;<span>{toy.inStock ? 'In stock' : 'Out of stock'}</span></h6>
-                <h6>Created at: {transferTimestampToStr(toy.createdAt)}</h6>
+                {toy.owner && <h6>Owner: {toy.owner}</h6>}
             </div>
         </article>
     )
