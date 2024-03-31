@@ -37,7 +37,8 @@ function getDefaultFilter() {
     return {
         name: '',
         inStock: 'all',
-        sortBy: ''
+        sortBy: '',
+        labels: ''
     }
 }
 
