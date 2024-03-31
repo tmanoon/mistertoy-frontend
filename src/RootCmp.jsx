@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import '../src/style/main.css'
+import './css/main.css'
 
 import { UserDetails } from './pages/UserDetails.jsx'
 import { About } from './pages/About.jsx'
