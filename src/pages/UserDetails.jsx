@@ -24,7 +24,7 @@ export function UserDetails() {
 
     if (!user) return <div>Loading...</div>
 
-    const loggedInUser = userService.getLoggedinUser()
+    const loggedInUser = userService.getLoggedInUser()
     const isMyProfile = loggedInUser && loggedInUser._id === userId
     return (
         <section className="user-details">
