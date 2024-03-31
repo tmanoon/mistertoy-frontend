@@ -9,18 +9,17 @@ import { saveToy } from "../store/actions/toy.actions.js"
 export function ToyEdit() {
     const navigate = useNavigate()
     // const [toyToEdit, setToyToEdit] = useState(toyService.getEmptyToy())
-    let initialValues = toyService.getEmptyToy()
+    const initialValues = toyService.getEmptyToy()
     const { toyId } = useParams()
     const labels = toyService.getLabels()
 
     const { values, setValues, errors, handleChange, handleBlur} = useFormik({
         initialValues,
-        validationSchema: editSchema,
+        validationSchema: editSchema
     })
 
     useEffect(() => {
         if (toyId && values === initialValues) loadToy()
-        console.log(values)
     }, [values])
 
     async function loadToy() {
