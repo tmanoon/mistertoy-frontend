@@ -1,0 +1,18 @@
+/* Setup */
+@import '../scss/setup/vars.scss';
+@import '../scss/setup/typography.scss';
+
+/* Base */
+@import '../scss/base/base.scss';
+@import '../scss/base/helpers.scss';
+@import '../scss/base/layout.scss';
+
+/* Pages */
+@import '../scss/pages/toyIndex.scss';
+@import '../scss/pages/toyEdit.scss';
+/* Components */
+@import '../scss/cmps/appHeaderFooter.scss';
+@import '../scss/cmps/toyList.scss';
+@import '../scss/cmps/toyPreview.scss';
+@import '../scss/cmps/loginSignup.scss';
+@import '../scss/cmps/toyFilter.scss';
