@@ -2,7 +2,8 @@ import { useEffect, useState, useRef } from 'react'
 import { utilService } from "../services/util.service.js"
 import { TxtField } from './TxtField.jsx'
 import { SelectEl } from './SelectEl.jsx'
-// import { StockSelect } from './StockSelect.jsx'
+import { MultiSelectEl } from './MultiSelectEl.jsx'
+import { toyService } from '../services/toy.service.js'
 
 export function ToyFilter({ filterBy, onSetFilter }) {
 
@@ -12,13 +13,6 @@ export function ToyFilter({ filterBy, onSetFilter }) {
     useEffect(() => {
         onSetFilter.current(filterByToEdit)
     }, [filterByToEdit])
-
-
-    function handleChange({ target }) {
-        let { value, name: field, type } = target
-        value = type === 'number' ? +value : value
-        setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
-    }
 
     return <section className="toy-filter flex center" style={{ position: 'relative' }}>
         <TxtField by={'name'} setFilterByToEdit={setFilterByToEdit} />
@@ -31,6 +25,8 @@ export function ToyFilter({ filterBy, onSetFilter }) {
         { status: 'Price', value: 'price' }, 
         { status: 'Creation date', value: 'createdAt' }]}
         setFilterByToEdit={setFilterByToEdit} name={"sortBy"} />
+        <MultiSelectEl options={toyService.getLabels()} by={'Labels'} 
+        setFilterByToEdit={setFilterByToEdit} />
     </section>
 }
 
