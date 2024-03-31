@@ -7,9 +7,8 @@ export function AppHeader() {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
-        const loggedInuUser = userService.getLoggedinUser()
-        console.log(loggedInuUser)
-        if(loggedInuUser) setUser(loggedInuUser)
+        const loggedInUser = userService.getLoggedInUser()
+        if(loggedInUser) setUser(loggedInUser)
     }, [])
 
     return <>

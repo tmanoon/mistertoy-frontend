@@ -1,18 +1,27 @@
 import { login, logout, signup } from '../store/actions/user.actions'
-import { userService } from '../services/user.service.js'
+import { getLoggedInUser } from '../store/actions/user.actions'
 import { useState } from 'react'
+import { useFormik } from 'formik'
+import { userService } from '../services/user.service.js'
+import { loginSchema, signupSchema } from '../schemas/loginSignupSchema.js'
 
 export function LoginSignup() {
-    const [loggedInUser, setLoggedInUser] = useState(userService.getLoggedinUser())
-    const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
+    const [loggedInUser, setLoggedInUser] = useState(getLoggedInUser())
+    // const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
     const [isSignup, setSignup] = useState(false)
+
+    const initialValues = userService.getEmptyCredentials()
+    const { values, errors, setValues, handleChange, handleBlur } = useFormik({
+        initialValues,
+        validationSchema: isSignup ? signupSchema : loginSchema
+    })
 
     async function onLogoutUser(e) {
         try {
             e.stopPropagation()
-            await logout(credentials)
-            setLoggedInUser(userService.getLoggedinUser())
-            setCredentials(userService.getEmptyCredentials())
+            await logout(values)
+            setLoggedInUser(getLoggedInUser())
+            setValues(userService.getEmptyCredentials())
         } catch (err) {
             console.log(err)
         }
@@ -23,18 +32,18 @@ export function LoginSignup() {
         setSignup(isSignup => !isSignup)
     }
 
-    function onLoginSignupUser(e) {
-        e.stopPropagation()
-        const { name, value } = e.target
-        setCredentials(prevCredentials => ({ ...prevCredentials, [name]: value }))
-    }
+    // function onLoginSignupUser(e) {
+    //     e.stopPropagation()
+    //     const { name, value } = e.target
+    //     setCredentials(prevCredentials => ({ ...prevCredentials, [name]: value }))
+    // }
 
     async function onSetUser(e) {
         try {
             e.preventDefault()
-            console.log(credentials)
-            !credentials.fullname ? await login(credentials) : await signup(credentials)
-            setLoggedInUser(userService.getLoggedinUser())
+            console.log(values)
+            !values.fullname ? await login(values) : await signup(values)
+            setLoggedInUser(getLoggedInUser())
         } catch (err) {
             console.log(err => console.log(err))
         }
@@ -52,13 +61,29 @@ export function LoginSignup() {
                 Please log in here:
                 <div>
                     <form className='flex form-login-signup' onSubmit={onSetUser}>
-                        <input value={credentials.username} type="text" name="username"
-                            placeholder="Enter your username" onChange={onLoginSignupUser} />
-                        <input value={credentials.password} type="password" name="password"
-                            placeholder="Your password" onChange={onLoginSignupUser} />
+                        <input
+                            value={values.username}
+                            type="text" name="username"
+                            placeholder="Enter your username"
+                            onChange={handleChange}
+                            className={errors.username ? 'error-input' : ''}
+                            onBlur={handleBlur} />
+                        <input
+                            value={values.password}
+                            type="password"
+                            name="password"
+                            placeholder="Your password"
+                            onChange={handleChange}
+                            className={errors.password ? 'error-input' : ''}
+                            onBlur={handleBlur} />
                         {isSignup &&
-                            <input value={credentials.fullname} type="text" name="fullname"
-                                placeholder="Your full name" onChange={onLoginSignupUser} />}
+                            <input value={values.fullname}
+                                type="text"
+                                name="fullname"
+                                placeholder="Your full name"
+                                onChange={handleChange}
+                                className={errors.fullname ? 'error-input' : ''}
+                                onBlur={handleBlur} />}
                         <button>{isSignup ? 'Sign up' : 'Login'}</button>
                     </form>
                     <span>Not a user yet? Click <span className='click-signup' onClick={onSignupUser}>here </span> to sign up.</span>

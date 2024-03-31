@@ -8,7 +8,7 @@ export const userService = {
     logout,
     signup,
     getById,
-    getLoggedinUser,
+    getLoggedInUser,
     updateScore,
     getEmptyCredentials
 }
@@ -54,7 +54,7 @@ async function logout() {
 
 async function updateScore(diff) {
     try {
-        if (getLoggedinUser().score + diff < 0) return Promise.reject('No credit')
+        if (getLoggedInUser().score + diff < 0) return Promise.reject('No credit')
         const user = await httpService.put('/user', { diff })
         _setLoggedinUser(user)
         return user.score
@@ -82,7 +82,7 @@ function getEmptyCredentials() {
     }
 }
 
-function getLoggedinUser() {
+function getLoggedInUser() {
     const user = JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN))
     return user
 }

@@ -75,7 +75,7 @@ function save(toy) {
         return storageService.put(STORAGE_KEY, toy)
     } else {
         // when switching to backend - remove the next line
-        // toy.owner = userService.getLoggedinUser()
+        // toy.owner = userService.getLoggedInUser()
         toy._id = utilService.makeId()
         toy.createdAt = Date.now()
         return storageService.post(STORAGE_KEY, toy)

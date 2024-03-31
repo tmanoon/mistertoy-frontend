@@ -44,9 +44,9 @@ export function checkout(diff) {
         })
 }
 
-export function getLoggedinUser() {
+export function getLoggedInUser() {
     try {
-        const user = userService.getLoggedinUser()
+        const user = userService.getLoggedInUser()
         store.dispatch({ type: SET_USER, user })
         return user
     } catch (err) {

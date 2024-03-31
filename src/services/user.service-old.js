@@ -8,7 +8,7 @@ export const userService = {
     logout,
     signup,
     getById,
-    getLoggedinUser,
+    getLoggedInUser,
     updateScore,
     getEmptyCredentials
 }
@@ -36,7 +36,7 @@ function signup({ username, password, fullname }) {
 
 
 function updateScore(diff) {
-    const loggedInUserId = getLoggedinUser()._id
+    const loggedInUserId = getLoggedInUser()._id
     return userService.getById(loggedInUserId)
         .then(user => {
             if (user.score + diff < 0) return Promise.reject('No credit')
@@ -54,7 +54,7 @@ function logout() {
     return Promise.resolve()
 }
 
-function getLoggedinUser() {
+function getLoggedInUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN))
 }
 

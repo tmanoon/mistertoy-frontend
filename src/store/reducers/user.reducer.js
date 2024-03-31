@@ -13,7 +13,7 @@ export const SET_USER_SCORE = 'SET_USER_SCORE'
 
 const initialState = {
     count: 105,
-    loggedInUser: userService.getLoggedinUser()
+    loggedInUser: userService.getLoggedInUser()
 }
 
 export function userReducer(state = initialState, action = {}) {
