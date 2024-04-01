@@ -4,18 +4,19 @@ import { useEffect } from 'react'
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 import { ToyFilter } from '../cmps/ToyFilter.jsx'
 import { ToyList } from '../cmps/ToyList.jsx'
+import { loadReviews } from '../store/actions/review.actions.js'
 import { loadToys, removeToyOptimistic, setFilterBy } from '../store/actions/toy.actions.js'
 // import { ADD_TOY_TO_CART } from '../store/reducers/toy.reducer.js'
 
 export function ToyIndex() {
 
-    const dispatch = useDispatch()
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
 
     useEffect(() => {
         loadToys()
+        loadReviews()
             .catch(err => {
                 showErrorMsg('Cannot load toys', err)
             })
@@ -34,11 +35,11 @@ export function ToyIndex() {
         }
     }
 
-    function addToCart(toy) {
-        console.log(`Adding ${toy.name} to cart`)
-        dispatch({ type: ADD_TOY_TO_CART, toy })
-        showSuccessMsg('Added to cart')
-    }
+    // function addToCart(toy) {
+    //     console.log(`Adding ${toy.name} to cart`)
+    //     dispatch({ type: ADD_TOY_TO_CART, toy })
+    //     showSuccessMsg('Added to cart')
+    // }
 
     return (
         <div>
