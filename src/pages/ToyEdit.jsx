@@ -13,7 +13,7 @@ export function ToyEdit() {
     const { toyId } = useParams()
     const labels = toyService.getLabels()
 
-    const { values, setValues, errors, handleChange, handleBlur} = useFormik({
+    const { values, setValues, errors, handleChange, handleBlur } = useFormik({
         initialValues,
         validationSchema: editSchema
     })
@@ -32,12 +32,18 @@ export function ToyEdit() {
         }
     }
 
-    function handleCheckboxChange(ev) {
-        const { name, value, checked } = ev.target;
+    function handleLabelsChange(ev) {
+        const { name, value, checked } = ev.target
         const updatedLabels = checked
-            ? [...values.labels, value] 
+            ? [...values.labels, value]
             : values.labels.filter(label => label !== value)
         setValues({ ...values, [name]: updatedLabels })
+    }
+
+    function handleCheckboxChange(ev) {
+        ev.stopPropagation()
+        const { name, checked } = ev.target
+        setValues({ ...values, [name]: checked })
     }
 
     async function onSaveToy(e) {
@@ -85,16 +91,16 @@ export function ToyEdit() {
                     <ul>
                         {labels.map((label) => {
                             return <li key={label}>
-                                <input type="checkbox" id={label} onChange={handleCheckboxChange} 
-                                checked={values.labels.includes(label)} name="labels" value={label} />
+                                <input type="checkbox" id={label} onChange={handleLabelsChange}
+                                    checked={values.labels.includes(label)} name="labels" value={label} />
                                 <label htmlFor={label}>{label}</label>
                             </li>
                         })}
                     </ul>
                 </div>
                 <div className="stock">
+                    <input type="checkbox" id="stock" name="inStock" checked={values.inStock} onChange={handleCheckboxChange} />
                     <label htmlFor="stock">In stock: </label>
-                    <input type="checkbox" id="stock" name="inStock" checked={values.inStock} onChange={handleChange} />
                 </div>
                 <button type="submit">{values._id ? 'Save' : 'Add'}</button>
                 <Link to="/toy">Cancel</Link>
