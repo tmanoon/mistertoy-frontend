@@ -3,13 +3,13 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 import { toyService } from "../services/toy.service.js"
 import { store } from '../store/store.js'
 import { utilService } from "../services/util.service.js"
-import { saveToy } from '../store/actions/toy.actions.js'
+import { addToyMsg } from "../store/actions/toy.actions.js"
 
 export function ToyDetails() {
     const [toy, setToy] = useState(null)
     const user = store.getState().userModule.loggedInUser
     const [userMsg, setUserMsg] = useState('')
-    const [toyMsgs, setMsgs] = useState([])
+    // const [toyReviews, setToyReviews] = useState(toy)
     const { toyId } = useParams()
     const navigate = useNavigate()
 
@@ -25,11 +25,12 @@ export function ToyDetails() {
         if (toyId) loadToy()
     }, [toyId])
 
+    console.log(toy)
+
     async function loadToy() {
         try {
             const toy = await toyService.getById(toyId)
             setToy(toy)
-            setMsgs(toy.msgs)
         } catch (err) {
             console.log('Had issues in toy details', err)
             navigate('/toy')
@@ -42,20 +43,19 @@ export function ToyDetails() {
         setUserMsg(value)
     }
 
-    function onAddMsg() {
-        const userMsgToToy = createMsg()
-        setMsgs(prevToyMsgs => ([...prevToyMsgs, userMsgToToy]))
-        saveToy(toy)
+    async function onAddMsg() {
+        try {
+            const userMsgToToy = _createMsg()
+            const msg = await addToyMsg(toy, userMsgToToy)
+            setToy(prevToy => ({...prevToy, msgs: [...prevToy.msgs, msg]}))
+        } catch (err) {
+            console.log(err)
+        }
     }
 
-    function createMsg() {
+    function _createMsg() {
         const msg = {}
-        msg.id = utilService.makeId()
         msg.txt = userMsg
-        msg.by = {
-            _id: user._id,
-            fullname: user.fullname
-        }
         return msg
     }
 
@@ -73,7 +73,7 @@ export function ToyDetails() {
                 {toy.labels.length > 1 && toy.labels.map((label, idx, arr) => <span key={label}> {label} {idx < arr.length - 1 && ','} </span>)}
             </h2>
             <h2>Toy messages: </h2>
-            {toyMsgs.length && <ul>{toyMsgs.map(msg =>
+            {toy.msgs.length && <ul>{toy.msgs.map(msg =>
                 <li key={msg.id}>
                     <h3>" {msg.txt} "</h3>
                     <h5>By: {msg.by.fullname}, id: {msg.by._id}</h5>

@@ -53,3 +53,13 @@ export async function saveToy(toy) {
 export function setFilterBy(filterBy) {
     store.dispatch({ type: SET_FILTER_BY, filterBy })
 }
+
+export async function addToyMsg(toy, msg) {
+    try {
+    const addedMsg = await toyService.addToyMsg(toy, msg)
+    return addedMsg
+    } catch(err) {
+        console.log('err', err)
+        throw err
+    }
+}

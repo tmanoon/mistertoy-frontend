@@ -23,6 +23,10 @@ function save(toy) {
     }
 }
 
+function addToyMsg(toy ,msg) {
+    return httpService.post(BASE_URL + toy._id + '/msg', {txt: msg.txt})
+}
+
 function getEmptyToy() {
     return {
         name: '',
@@ -53,5 +57,6 @@ export const toyService = {
     remove,
     getEmptyToy,
     getDefaultFilter,
-    getLabels
+    getLabels,
+    addToyMsg
 }
