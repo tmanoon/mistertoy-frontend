@@ -7,7 +7,6 @@ import { loginSchema, signupSchema } from '../schemas/loginSignupSchema.js'
 
 export function LoginSignup() {
     const [loggedInUser, setLoggedInUser] = useState(getLoggedInUser())
-    // const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
     const [isSignup, setSignup] = useState(false)
 
     const initialValues = userService.getEmptyCredentials()
@@ -32,16 +31,9 @@ export function LoginSignup() {
         setSignup(isSignup => !isSignup)
     }
 
-    // function onLoginSignupUser(e) {
-    //     e.stopPropagation()
-    //     const { name, value } = e.target
-    //     setCredentials(prevCredentials => ({ ...prevCredentials, [name]: value }))
-    // }
-
     async function onSetUser(e) {
         try {
             e.preventDefault()
-            console.log(values)
             !values.fullname ? await login(values) : await signup(values)
             setLoggedInUser(getLoggedInUser())
         } catch (err) {
@@ -54,6 +46,7 @@ export function LoginSignup() {
             {loggedInUser &&
                 <div>
                     <p>Hello {loggedInUser.fullname}</p>
+                    <p>your score is: {loggedInUser.score}</p>
                     <p>We hope you enjoy your time here. Don't forget to logout by clicking <span className="click-logout" onClick={onLogoutUser}>here</span> whenever you plan to quit.</p>
                 </div>}
 
