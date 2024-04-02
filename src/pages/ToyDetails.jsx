@@ -5,11 +5,12 @@ import { store } from '../store/store.js'
 import { useSelector } from 'react-redux'
 import { addToyMsg } from "../store/actions/toy.actions.js"
 import { addReview } from '../store/actions/review.actions.js'
+import { ChatRoom } from '../cmps/ChatRoom.jsx'
 
 export function ToyDetails() {
     const [toy, setToy] = useState(null)
     const reviews = useSelector(storeState => storeState.reviewModule.reviews)
-    const user = store.getState().userModule.loggedInUser
+    const user = store.getState().userModule.user
     const [userMsg, setUserMsg] = useState('')
     const [userReview, setUserReview] = useState('')
     const [toyReviews, setToyReviews] = useState([])
@@ -57,11 +58,7 @@ export function ToyDetails() {
             setToy(prevToy => ({ ...prevToy, msgs: [...prevToy.msgs, msg] }))
             setUserMsg('')
         } else {
-            const review = {
-                userId: user._id,
-                txt: userReview
-            }
-            console.log(review)
+            const review = { toyId: toy._id, txt: userReview }
             await addReview(review)
         }
         } catch (err) {
@@ -89,7 +86,7 @@ export function ToyDetails() {
                 {toy.labels.length > 1 && toy.labels.map((label, idx, arr) => <span key={label}> {label} {idx < arr.length - 1 && ','} </span>)}
             </h2>
 
-            {toy.msgs.length && <> 
+            {toy.msgs.length > 0 && <> 
             <h2>Toy messages:</h2>
                 <ul>
                     {toy.msgs.map(msg =>
@@ -97,7 +94,7 @@ export function ToyDetails() {
                 </ul>
             </>}
 
-            {toyReviews.length && <>
+            {toyReviews.length > 0 && <>
                 <h2>Reviews:</h2>
                 <ul>
                     {toyReviews.map(review => 
@@ -108,15 +105,17 @@ export function ToyDetails() {
             {user &&
                 <section className="user-actions">
                     <textarea placeholder="Add a message" name="msg" value={userMsg} onChange={onUserTxtChange}></textarea>
-                    <button name="msgs" onClick={onAddAction}>Add message</button>
+                    <button name="msgs" onClick={onAddAction}>Add a message</button>
                     <textarea placeholder="Add a review" name="review" value={userReview} onChange={onUserTxtChange}></textarea>
-                    <button name="reviews" onClick={onAddAction}>Add Review</button>
+                    <button name="reviews" onClick={onAddAction}>Add a review</button>
                 </section>}
+                {/* {toy && user && <ChatRoom toy={toy} />} */}
             <Link to={`/toy/edit/${toy._id}`}>Edit</Link> &nbsp;
             <Link to={`/toy`}>Back</Link>
             <p>
                 {/* <Link to="/toy/lqIQG">Next toy</Link> */}
             </p>
+            
         </section>
     )
 }
