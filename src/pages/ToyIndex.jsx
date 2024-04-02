@@ -22,6 +22,7 @@ export function ToyIndex() {
             })
     }, [filterBy])
 
+
     function onSetFilter(filterBy) {
         setFilterBy(filterBy)
     }

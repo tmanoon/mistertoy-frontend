@@ -1,26 +1,9 @@
-.contact-list {
-    columns: 2 360px;
-    gap: 2em;
-    column-rule: rgba(240, 245, 255, 0.678) solid 1px;
-}
+.toy-list {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
-.contact-list li:first-child {
-    border-block-start: rgba(240, 245, 255, 0.678) solid 1px;
-}
-
-.contact-list li:not(:last-child) {
-    padding-block: 0.25em;
-    border-block-end: rgba(240, 245, 255, 0.678) solid 1px;
-}
-
-.contact-actions {
-    gap: 0.3125em;
-    min-width: 10%;
-}
-
-.contact-list,
-.contact-list li {
-    transition: 1s ease-in-out;
+    & > li {
+        width: max-content;
+    }
 }
 
 .toy-actions .remove-btn::before {

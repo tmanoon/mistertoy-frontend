@@ -1,9 +1,13 @@
 $bgc: #ffffff;
 body {
     background-color: $bgc;
+    .toy-list {
+    display: grid;
 }
 
-// .home-section,
-// .contacts-section {
-//     margin-inline: 1em;
-// }
+.toy-preview {
+    width: max-content;
+}
+
+}
+
