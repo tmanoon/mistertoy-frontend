@@ -9,8 +9,7 @@ export function ToyPreview({ toy, onRemoveToy }) {
         return `${day}/${month}/${year}`
     }
     return (//flex column align-center
-        <article className="toy-preview">
-            
+        <article>
             <div>
                 <h4>{toy.name}</h4>
                 <h6>Price:&nbsp;&nbsp;<span>${toy.price}</span></h6>

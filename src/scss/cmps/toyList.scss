@@ -1,5 +1,6 @@
 .toy-list {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-block-start: 3rem;
 
     & > li {
         width: max-content;
