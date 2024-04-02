@@ -2,6 +2,7 @@ import { reviewService } from '../../services/review.service.js'
 import { store } from '../store.js'
 import { ADD_REVIEW, REMOVE_REVIEW, SET_REVIEWS } from '../reducers/review.reducer.js'
 import { SET_SCORE, SET_WATCHED_USER } from '../reducers/user.reducer'
+import { userService } from '../../services/user.service.js'
 
 // Command Creators
 export function getActionRemoveReview(reviewId) {
@@ -24,9 +25,10 @@ export async function loadReviews() {
 
 export async function addReview(review) {
   try {
-    const addedReview = await reviewService.add(review.txt, review.userId)
+    const addedReview = await reviewService.add(review.txt, review.toyId)
     store.dispatch(getActionAddReview(addedReview))
-    const { score } = addedReview.byUser
+    const user = await userService.getById(addedReview.userId)
+    const { score } = user
     store.dispatch({ type: SET_SCORE, score })
   } catch (err) {
     console.log('ReviewActions: err in addReview', err)

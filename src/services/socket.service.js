@@ -15,7 +15,7 @@ const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
 
 const baseUrl = (process.env.NODE_ENV === 'production') ? '' : '//localhost:3030'
 // export const socketService = createSocketService()
-export const socketService = createDummySocketService()
+export const socketService = createSocketService()
 
 // for debugging from console
 window.socketService = socketService
@@ -28,7 +28,7 @@ function createSocketService() {
   const socketService = {
     setup() {
       socket = io(baseUrl)
-      const user = userService.getLoggedinUser()
+      const user = userService.getLoggedInUser()
       if (user) this.login(user._id)
     },
     on(eventName, cb) {
@@ -51,7 +51,6 @@ function createSocketService() {
     terminate() {
       socket = null
     },
-
   }
   return socketService
 }

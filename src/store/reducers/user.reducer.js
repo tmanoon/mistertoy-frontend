@@ -16,7 +16,7 @@ export const SET_USER_SCORE = 'SET_USER_SCORE'
 
 const initialState = {
     count: 105,
-    loggedInUser: userService.getLoggedInUser(),
+    user: userService.getLoggedInUser(),
     users: [],
     watchedUser : null
 }
@@ -36,27 +36,25 @@ export function userReducer(state = initialState, action = {}) {
         case SET_USER:
             return {
                 ...state,
-                loggedInUser: action.user
+                user: action.user
             }
-        case SET_USER_SCORE:
-            const loggedInUser = { ...state.loggedInUser, score: action.score }
-            return { ...state, loggedInUser }
+        // case SET_USER_SCORE:
+        //     const user = { ...state.user, score: action.score }
+        //     return { ...state, user }
             case SET_WATCHED_USER:
-                newState = { ...state, watchedUser: action.user }
+                return { ...state, watchedUser: action.user }
                 break
             case REMOVE_USER:
-                newState = {
+                return {
                     ...state,
                     users: state.users.filter(user => user._id !== action.userId)
                     
                 }
                 break
             case SET_USERS:
-                newState = { ...state, users: action.users }
-                break
+                return { ...state, users: action.users }
             case SET_SCORE:
-                newState = { ...state, user: { ...state.user, score: action.score } }
-                break
+                return { ...state, user: { ...state.user, score: action.score } }
         default:
             return state;
     }

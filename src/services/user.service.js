@@ -29,9 +29,9 @@ async function login({ username, password }) {
 }
 
 
-async function signup({ username, password, fullname, isAdmin = false }) {
+async function signup({ username, password, fullname, isAdmin = false, score = 10 }) {
     try {
-        const user = { username, password, fullname, isAdmin }
+        const user = { username, password, fullname, isAdmin, score }
         const _user = await httpService.post(BASE_URL + 'signup', user)
         if (_user) return _setLoggedinUser(_user)
         else return Promise.reject('Invalid signup')
@@ -54,7 +54,7 @@ async function logout() {
 
 async function updateScore(diff) {
     try {
-        if (getLoggedInUser().score + diff < 0) return Promise.reject('No credit')
+        if (getLoggedInUser().score + diff < 0) return Promise.reject('No score')
         const user = await httpService.put('/user', { diff })
         _setLoggedinUser(user)
         return user.score
@@ -68,7 +68,7 @@ function getById(userId) {
 }
 
 function _setLoggedinUser(user) {
-    const userToSave = { _id: user._id, fullname: user.fullname}
+    const userToSave = { _id: user._id, fullname: user.fullname, score: user.score, username: user.username}
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave
 }

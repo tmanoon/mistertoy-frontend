@@ -29,7 +29,7 @@ function login({ username, password }) {
 }
 
 function signup({ username, password, fullname }) {
-    const user = { username, password, fullname, score: 10000 }
+    const user = { username, password, fullname, score: 10 }
     return storageService.post(STORAGE_KEY, user)
         .then(_setLoggedinUser)
 }
